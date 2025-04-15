@@ -7,6 +7,7 @@ const STATIC_ASSETS = [
   "/style.css",
   "/app.js",
   "/pwa.js",
+  "/voice.js",
 ];
 
 self.addEventListener("install", (event) => {
