@@ -3,7 +3,7 @@ const User = require("../models/user.model");
 
 const ustvariToken = (user) => {
   return jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "60s",
+    expiresIn: "1h",
   });
 };
 

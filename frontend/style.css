@@ -1,0 +1,89 @@
+/* Osnovni stil za tabele */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+/* Stil za vnosna polja */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 50%;
+  padding: 8px;
+  margin: 5px 0;
+}
+
+/* PWA-specifični stili */
+body {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #4285f4;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3367d6;
+}
+
+#offlineIndicator {
+  display: none;
+  background-color: #ff9800;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: sticky;
+  top: 0;
+  margin-bottom: 20px;
+  z-index: 100;
+}
+
+#notification {
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.keyboard-shortcuts {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Odzivni dizajn za mobilne naprave */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}

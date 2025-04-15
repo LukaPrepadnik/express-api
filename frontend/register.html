@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4285f4" />
+    <title>Registracija</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png" />
+  </head>
+  <body>
+    <h1>Registracija</h1>
+    <form id="registerForm">
+      <input type="text" id="ime" placeholder="Ime" required />
+      <input type="text" id="priimek" placeholder="Priimek" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="geslo" placeholder="Geslo" required />
+      <button type="submit">Registriraj</button>
+    </form>
+
+    <p>Že imate račun? <a href="login.html">Prijava</a></p>
+    <p id="error" style="color: red"></p>
+
+    <script src="pwa.js"></script>
+    <script>
+      const form = document.getElementById("registerForm");
+      const errorP = document.getElementById("error");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const uporabnik = {
+          ime: document.getElementById("ime").value,
+          priimek: document.getElementById("priimek").value,
+          email: document.getElementById("email").value,
+          geslo: document.getElementById("geslo").value,
+        };
+
+        try {
+          if (navigator.onLine) {
+            const res = await fetch("http://localhost:3000/api/auth/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(uporabnik),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+              alert("Registracija uspešna! Prijavite se.");
+              window.location.href = "login.html";
+            } else {
+              errorP.textContent = data.message || "Napaka pri registraciji.";
+            }
+          } else {
+            errorP.textContent =
+              "Za registracijo potrebujete internetno povezavo.";
+          }
+        } catch (err) {
+          errorP.textContent = "Napaka pri povezavi s strežnikom.";
+        }
+      });
+    </script>
+  </body>
+</html>

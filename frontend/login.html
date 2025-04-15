@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="sl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4285f4" />
+    <title>Prijava</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png" />
+  </head>
+  <body>
+    <h1>Prijava</h1>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="geslo" placeholder="Geslo" required />
+      <button type="submit">Prijava</button>
+    </form>
+    <p>Nimate računa? <a href="register.html">Registracija</a></p>
+
+    <p id="error" style="color: red"></p>
+
+    <script src="pwa.js"></script>
+    <script>
+      const loginForm = document.getElementById("loginForm");
+      const errorP = document.getElementById("error");
+
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email").value;
+        const geslo = document.getElementById("geslo").value;
+
+        try {
+          if (navigator.onLine) {
+            const res = await fetch("http://localhost:3000/api/auth/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, geslo }),
+            });
+
+            const data = await res.json();
+            if (data.token) {
+              localStorage.setItem("token", data.token);
+              window.location.href = "index.html";
+            } else {
+              errorP.textContent = data.message || "Napaka pri prijavi.";
+            }
+          } else {
+            errorP.textContent = "Za prijavo potrebujete internetno povezavo.";
+          }
+        } catch (err) {
+          errorP.textContent = "Napaka pri povezavi s strežnikom.";
+        }
+      });
+    </script>
+  </body>
+</html>

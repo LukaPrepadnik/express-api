@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="sl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4285f4" />
+    <title>Uporabniki</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <div id="offlineIndicator">Ni povezave z internetom</div>
+    <h1>Seznam uporabnikov</h1>
+    <button id="logoutBtn">Odjava</button>
+    <br />
+    <br />
+
+    <input type="text" id="search" placeholder="Išči po imenu, emailu ..." />
+    <div id="notification"></div>
+
+    <form id="userForm">
+      <input type="hidden" id="userId" />
+      <input type="text" id="ime" placeholder="Ime" required />
+      <input type="text" id="priimek" placeholder="Priimek" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="geslo" placeholder="Geslo" required />
+      <br />
+      <br />
+      <button type="submit">Shrani</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Ime</th>
+          <th>Priimek</th>
+          <th>Email</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+      <tbody id="userList"></tbody>
+    </table>
+
+    <footer>
+      <p class="keyboard-shortcuts">
+        Bližnjice na tipkovnici: Ctrl+D (nov uporabnik), Ctrl+K (iskanje),
+        Ctrl+Q (odjava)
+      </p>
+    </footer>
+
+    <script src="pwa.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
